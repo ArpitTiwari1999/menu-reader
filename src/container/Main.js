@@ -4,7 +4,7 @@ import SubmitShopId from "../action/onShopIdSubmit";
 import Main from "../components/Main";
 
 const mapStateToProps = state => ({
-    nav : state.menu
+    nav : state.nav
 })
 
 const mapDisatchToProps = dispatch => ({
