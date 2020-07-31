@@ -2,6 +2,22 @@
     cursor: pointer;
     color: white
 }
+.icon {
+    display: none;
+}
 @media screen and (max-width : 800px) {
-
+    .nav{ 
+        display: none;
+    }
+}
+@media screen and (max-width : 800px) {
+    .icon {
+        display: block;
+    }
+    .nav.icon{
+        display: flex;
+    }
+    .active {
+        display: none;
+    }
 }
