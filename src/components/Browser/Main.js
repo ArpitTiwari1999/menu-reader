@@ -1,12 +1,10 @@
 import React from 'react';
-import Home from "./Home";
-import Menu from "./Menu";
+import Home from "../../container/Browser/Home";
+import Menu from "../../container/Browser/Menu";
 
 function Main ({nav, onSubmit}){
-    console.log(nav);
-    
     if(nav === "Home")
-        return <Home onSubmit={onSubmit} />
+        return <Home />
     else if(nav === "Menu")
         return <Menu />
     else

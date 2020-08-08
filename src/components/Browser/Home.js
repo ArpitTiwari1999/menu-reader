@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Home ({onSubmit}){
+function Home ({ onSubmit }){
     let shopId;
     return (
         <div className="container mt-2">
@@ -10,7 +10,7 @@ function Home ({onSubmit}){
                     e.preventDefault();
                     if(!shopId.value.trim())
                         return
-                    onSubmit(shopId);
+                    onSubmit(shopId.value);
                     shopId.value='';
                 }}>
                     <input type="text" placeholder="*Shop code " ref={input => (shopId=input)}/>

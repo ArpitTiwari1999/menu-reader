@@ -1,6 +1,6 @@
 const initialState= {
     nav: "Home",
-    id : 0
+    id : -1
 }
 
 export default function mainReducer(state = initialState,action){
@@ -15,6 +15,12 @@ export default function mainReducer(state = initialState,action){
                 ...state,
                 nav : "Menu",
                 id : action.id
+            })
+        case "showQRMenu" :
+            return Object.assign({},state,{
+                ...state,
+                id : action.payload,
+                nav : "Menu"
             })
         default :
             return state;

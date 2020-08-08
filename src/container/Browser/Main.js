@@ -1,7 +1,6 @@
-import React from "react";
 import { connect } from "react-redux";
-import SubmitShopId from "../action/onShopIdSubmit";
-import Main from "../components/Main";
+import SubmitShopId from "../../action/onShopIdSubmit";
+import Main from "../../components/Browser/Main";
 
 const mapStateToProps = state => ({
     nav : state.nav

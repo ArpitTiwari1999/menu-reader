@@ -20,4 +20,7 @@
     .active {
         display: none;
     }
+    .nav.icon.responsive {
+        display: none;
+    }
 }
