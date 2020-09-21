@@ -5,6 +5,7 @@ const hadleScan = (data) => {
     if(data)
     {
         shopId.value=data;
+        console.log(data);
         document.getElementById('MainForm').submit();
     }
 }

@@ -11,6 +11,6 @@ function Main ({nav}){
     else if(nav === "Subscription")
         return <Subscription />
     else
-        return <div></div>
+        return <div>Invalid Selection of Header</div>
 }
 export default Main;

@@ -1,38 +1,60 @@
 import React, { useEffect } from 'react';
 import { FirebaseDatabaseNode } from "@react-firebase/database";
 import logo from '../../logo.png';
-import {VegIcon, NonvegIcon } from "../Icons";
-import AdSense from "react-adsense";
+import MenuList from "../../container/Mobile/MenuList";
 
-function Menu ({ id }){
+// import AdSense from "react-adsense"; updateMenu, Menu
+
+function Menu ({ id, updateMenu }){
+
+    let filter="";
+    var NewMenu;
+    var OriginalMenu;
+    const showMenu = (ShopMenu) => {
+        OriginalMenu = ShopMenu;
+        NewMenu = ShopMenu;
+        var TempNew={};
+        const filterMenu = () => {
+            if(filter && filter.value.trim() !== "" && NewMenu)
+            {
+                TempNew={};
+                Object.keys(OriginalMenu).filter(
+                    item =>{
+                            var TempField={};
+                            Object.keys(OriginalMenu[item]).filter(
+                                name => {
+                                    if((name.toLowerCase()).includes( filter.value.toLowerCase() ))
+                                    {
+                                        TempField[name]=OriginalMenu[item][name]
+                                    }
+                                    return "";
+                                }
+                            );
+                            if(TempField)
+                                TempNew[item]=TempField;
+                            return "";
+                        }
+                );
+                if(TempNew)
+                    NewMenu=TempNew;
+                updateMenu(NewMenu)
+            }
+            else
+                updateMenu({})
+        }
+        return(
+            <>
+                <div>Search : <input type="text" placeholder="*Enter Item Name" onChange={filterMenu} ref={input=> (filter=input) } /></div>
+                <br />
+                <MenuList menu={NewMenu} />
+            </>
+        );
+    }
     useEffect(()=>{
         document.title = "Menu";
     });
-    const showMenu = (Menu) => {
-        console.log(Menu);
-        return(
-                Object.keys(Menu).map((key, index) => (
-                                    <div className="w-100" key={index}>
-                                        <div>
-                                            <p className="text-secondary">{key}</p>
-                                            <div>
-                                                {
-                                                    Object.keys(Menu[key]).map((itemKey,itemIndex)=> (
-                                                        <div className="d-flex w-100 flex-row justify-content-between" key={itemIndex}>
-                                                            <p  className="d-flex flex-row">{(Menu[key][itemKey]['category'] && Menu[key][itemKey]['category'] === 'nonveg')?<NonvegIcon />:<VegIcon />}{itemKey}</p>
-                                                            <p><i className="fa">&#xf156;</i> {Menu[key][itemKey]['price']}</p>
-                                                        </div>
-                                                    ))
-                                                }
-                                            </div>
-                                        </div>
-                                        <hr />
-                                    </div>
-            ))
-            );
-    }
         return (
-            <FirebaseDatabaseNode path={`/Shop/${id?id:'null'}`} orederByKey>
+            <FirebaseDatabaseNode path={`/Shop/${id?id:'null'}`}>
                 {
                     d=>{
                         if(d.isLoading)
@@ -50,7 +72,7 @@ function Menu ({ id }){
                                             <p className="m-0">ID : {id}</p>
                                         </div>
                                     </div>
-                                    <AdSense.Google client="ca-pub-7292810486004926" slot="7806394673" />
+                                    {/* <AdSense.Google client="ca-pub-7292810486004926" slot="7806394673" /> showMenu(d.value.Menu) */}
                                     {
                                         (d.value && d.value.Menu)?showMenu(d.value.Menu):<div>Error fetching Menu</div>
                                     }
@@ -68,5 +90,6 @@ function Menu ({ id }){
                 }
             </FirebaseDatabaseNode>
         );
+        
 }
 export default Menu;

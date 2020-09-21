@@ -1,6 +1,7 @@
 const initialState= {
     nav: "Home",
-    id : -1
+    id : -1,
+    menu: {}
 }
 
 export default function mainReducer(state = initialState,action){
@@ -21,6 +22,11 @@ export default function mainReducer(state = initialState,action){
                 ...state,
                 id : action.payload,
                 nav : "Menu"
+            })
+        case "updateMenu" :
+            return Object.assign({},state,{
+                ...state,
+                menu : action.payload
             })
         default :
             return state;
